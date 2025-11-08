@@ -268,5 +268,27 @@ gradle-app.setting
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
+# ---------------------------
+# Custom ignores for project
+# ---------------------------
+
+# IntelliJ full folder (not just partial)
+.idea/
+
+# VS Code full folder (already partially handled, but ensure full ignore)
+.vscode/
+
+# Local H2 / embedded databases
+*.mv.db
+*.trace.db
+data/
+
+# Spring Boot local config (contains passwords)
+src/main/resources/application.properties
+
+# Logs & temp runtime files
+*.log
+*.out
+
 
 # End of https://www.toptal.com/developers/gitignore/api/java,maven,gradle,intellij,visualstudiocode,eclipse
