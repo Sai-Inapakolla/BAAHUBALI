@@ -1,0 +1,25 @@
+⚠️ IMPORTANT: UPDATE YOUR MONGODB CONNECTION STRING ⚠️
+
+1. Open: src/main/resources/application.properties
+
+2. Replace this line:
+   spring.data.mongodb.uri=YOUR_MONGODB_CONNECTION_STRING
+
+3. With your actual MongoDB Atlas connection string:
+   spring.data.mongodb.uri=mongodb+srv://username:password@cluster.mongodb.net/baahubali-bank?retryWrites=true&w=majority
+
+4. Get your connection string from:
+   - MongoDB Atlas Dashboard → Connect → Drivers → Connection String
+
+5. Make sure to:
+   - Replace <username> with your database username
+   - Replace <password> with your database password
+   - Replace <cluster> with your cluster URL
+   - Keep the database name as 'baahubali-bank' or change it if needed
+
+Example:
+spring.data.mongodb.uri=mongodb+srv://bankadmin:SecurePass123@mycluster.abc12.mongodb.net/baahubali-bank?retryWrites=true&w=majority
+
+After updating, run:
+mvn clean package
+mvn spring-boot:run

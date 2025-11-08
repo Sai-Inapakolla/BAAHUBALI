@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAAHUBALI - Secure Banking Made Simple</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f3f4f8 0%, #e7eaf4 100%);
+            min-height: 100vh;
+            color: #9d30d8;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #9d30d8;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .brand-text h1 {
+            color: #9d30d8;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .brand-text p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            background: #9d30d8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background: #9d30d8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.1);
+            margin-bottom: 30px;
+        }
+
+        /* Auth Section */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 70vh;
+        }
+
+        .auth-card {
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 50px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.15);
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 5px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .auth-tab.active {
+            background: white;
+            color: #9d30d8;
+            box-shadow: 0 4px 15px rgba(157, 48, 216, 0.2);
+        }
+
+        .welcome-text {
+            text-align: center;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #9d30d8;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(157, 48, 216, 0.1);
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #9d30d8 0%, #7922a5 100%);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Approve button used in pending-loans (admin/employee) */
+        .btn-approve {
+            background: #9d30d8;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.15s ease, transform 0.15s ease;
+            box-shadow: 0 6px 18px rgba(157, 48, 216, 0.12);
+        }
+
+        .btn-approve:hover {
+            background: #7a1fb0; /* slightly darker on hover */
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Dashboard: visibility controlled via .hidden class only */
+        .dashboard {
+        }
+
+        .account-overview {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .account-overview h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .balance-section {
+            background: linear-gradient(135deg, #9d30d8 0%, #7922a5 100%);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(157, 48, 216, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .balance-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .balance-amount {
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .welcome-user {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .action-icon.deposit {
+            background: #10b981;
+        }
+
+        .action-icon.withdraw {
+            background: #ef4444;
+        }
+
+        .action-icon.transfer {
+            background: #3b82f6;
+        }
+
+        .action-icon.history {
+            background: #8b5cf6;
+        }
+
+        .action-icon.loan {
+            background: #f59e0b;
+        }
+
+        .action-icon.loans {
+            background: #06b6d4;
+        }
+
+        .action-icon.employees {
+            background: #8b5cf6;
+        }
+
+        .action-btn h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .action-btn p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Transaction History */
+        .transaction-section {
+            background: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+
+        .transaction-section h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .transaction-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+            color: #333;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-info h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .transaction-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            color: #666;
+        }
+
+        .transaction-amount {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .transaction-amount.positive {
+            color: #10b981;
+        }
+
+        .transaction-amount.negative {
+            color: #ef4444;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+        }
+
+        .modal h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: auto;
+            padding: 20px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .balance-amount {
+                font-size: 2rem;
+            }
+
+            .glass-card {
+                padding: 20px;
+            }
+
+            .auth-card {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        .transaction-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .transaction-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .transaction-list::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .transaction-list::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Transaction count styling */
+        .transaction-count {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">🏦</div>
+                <div class="brand-text">
+                    <h1>BAAHUBALI</h1>
+                    <p>Secure Banking Made Simple</p>
+                </div>
+            </div>
+            <div class="user-section hidden" id="user-section">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <span id="user-greeting">Hi, User</span>
+                </div>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+
+        <!-- Authentication Section -->
+        <div id="auth-section" class="auth-container">
+            <div class="auth-card">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" onclick="switchTab('login')">Sign In</div>
+                    <div class="auth-tab" onclick="switchTab('register')">Sign Up</div>
+                </div>
+
+                <div class="welcome-text" id="welcome-text">Welcome Back!</div>
+
+                <!-- Login Form -->
+                <div id="login-form-container">
+                    <div id="login-alert"></div>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-role">I am</label>
+                            <select id="login-role" required>
+                                <option value="CUSTOMER">Customer</option>
+                                <option value="EMPLOYEE">Employee</option>
+                                <option value="ADMIN">Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="btn">Sign In</button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div id="register-form-container" class="hidden">
+                    <div id="register-alert"></div>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" placeholder="Create a password" required>
+                        </div>
+                        <button type="submit" class="btn">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- User Dashboard Section -->
+        <div id="user-dashboard" class="dashboard hidden">
+            <!-- Account Overview -->
+            <div class="account-overview">
+                <h2>My Account</h2>
+                <div class="balance-section">
+                    <div class="balance-label">Current Balance</div>
+                    <div class="balance-amount" id="balance-amount">$0.00</div>
+                    <div class="welcome-user">Welcome back, <span id="user-name">User</span>!</div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="action-btn" onclick="openModal('deposit')">
+                    <div class="action-icon deposit">$</div>
+                    <h3>Deposit</h3>
+                    <p>Add money to your account</p>
+                </div>
+                <div class="action-btn" onclick="openModal('withdraw')">
+                    <div class="action-icon withdraw">-</div>
+                    <h3>Withdraw</h3>
+                    <p>Take money from your account</p>
+                </div>
+                <div class="action-btn" onclick="openModal('transfer')">
+                    <div class="action-icon transfer">→</div>
+                    <h3>Transfer</h3>
+                    <p>Send money to others</p>
+                </div>
+                <div class="action-btn" onclick="showAllTransactions()">
+                    <div class="action-icon history">📊</div>
+                    <h3>History</h3>
+                    <p>View all transactions</p>
+                </div>
+                <div class="action-btn" onclick="openModal('loan-application')">
+                    <div class="action-icon loan">💰</div>
+                    <h3>Apply for Loan</h3>
+                    <p>Get financial assistance</p>
+                </div>
+                <div class="action-btn" onclick="loadMyLoans()">
+                    <div class="action-icon loans">📋</div>
+                    <h3>My Loans</h3>
+                    <p>View loan applications</p>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="transaction-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>Recent Transactions</h3>
+                    <button onclick="showAllTransactions()" class="btn btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.9rem;">
+                        View All Transactions
+                    </button>
+                </div>
+                <div class="transaction-list" id="transaction-list">
+                    <p style="text-align: center; color: rgba(255,255,255,0.6);">No transactions yet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard Section -->
+        <div id="admin-dashboard" class="dashboard hidden">
+            <!-- Admin Overview -->
+            <div class="account-overview">
+                <h2>Admin Dashboard</h2>
+                <div class="balance-section">
+                    <div class="balance-label">System Overview</div>
+                    <div class="balance-amount" id="admin-stats">Loading...</div>
+                    <div class="welcome-user">Welcome, <span id="admin-name">Admin</span>!</div>
+                </div>
+            </div>
+
+            <!-- Admin Quick Actions -->
+            <div class="quick-actions">
+                <div class="action-btn" onclick="loadAllUsers()">
+                    <div class="action-icon users">👥</div>
+                    <h3>Manage Users</h3>
+                    <p>View and manage all users</p>
+                </div>
+                <div class="action-btn" onclick="loadSystemStats()">
+                    <div class="action-icon stats">📊</div>
+                    <h3>System Stats</h3>
+                    <p>View system statistics</p>
+                </div>
+                <div class="action-btn" onclick="loadAllTransactionsAdmin()">
+                    <div class="action-icon history">📋</div>
+                    <h3>All Transactions</h3>
+                    <p>View all system transactions</p>
+                </div>
+                <div class="action-btn" onclick="openModal('create-user')">
+                    <div class="action-icon add">➕</div>
+                    <h3>Create User</h3>
+                    <p>Add new user to system</p>
+                </div>
+                <div class="action-btn" onclick="loadPendingLoans()">
+                    <div class="action-icon loan">💰</div>
+                    <h3>Pending Loans</h3>
+                    <p>Review loan applications</p>
+                </div>
+                <div class="action-btn" onclick="loadAllLoans()">
+                    <div class="action-icon loans">📊</div>
+                    <h3>All Loans</h3>
+                    <p>View all loan applications</p>
+                </div>
+                <div class="action-btn" onclick="loadEmployeeManagement()">
+                    <div class="action-icon employees">👥</div>
+                    <h3>Employee Management</h3>
+                    <p>Manage employees and their status</p>
+                </div>
+            </div>
+
+            <!-- Admin Data Section -->
+            <div class="transaction-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>System Data</h3>
+                    <button onclick="refreshAdminData()" class="btn btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.9rem;">
+                        Refresh
+                    </button>
+                </div>
+                <div class="transaction-list" id="admin-data-list">
+                    <p style="text-align: center; color: rgba(0,0,0,0.6);">Loading admin data...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Dashboard Section -->
+        <div id="employee-dashboard" class="dashboard hidden">
+            <!-- Employee Overview -->
+            <div class="account-overview">
+                <h2>Employee Dashboard</h2>
+                <div class="balance-section">
+                    <div class="balance-label">Customer Service</div>
+                    <div class="balance-amount" id="employee-stats">Loading...</div>
+                    <div class="welcome-user">Welcome, <span id="employee-name">Employee</span>!</div>
+                </div>
+            </div>
+
+            <!-- Employee Quick Actions -->
+            <div class="quick-actions">
+                <div class="action-btn" onclick="searchCustomer()">
+                    <div class="action-icon search">🔍</div>
+                    <h3>Search Customer</h3>
+                    <p>Find customer by email</p>
+                </div>
+                <div class="action-btn" onclick="loadCustomerTransactions()">
+                    <div class="action-icon history">📋</div>
+                    <h3>Customer History</h3>
+                    <p>View customer transactions</p>
+                </div>
+                <div class="action-btn" onclick="openModal('employee-deposit')">
+                    <div class="action-icon deposit">💰</div>
+                    <h3>Process Deposit</h3>
+                    <p>Deposit for customer</p>
+                </div>
+                <div class="action-btn" onclick="openModal('employee-withdraw')">
+                    <div class="action-icon withdraw">💸</div>
+                    <h3>Process Withdrawal</h3>
+                    <p>Withdraw for customer</p>
+                </div>
+                <div class="action-btn" onclick="loadPendingLoans()">
+                    <div class="action-icon loan">📋</div>
+                    <h3>Pending Loans</h3>
+                    <p>Review loan applications</p>
+                </div>
+                <div class="action-btn" onclick="loadAllLoans()">
+                    <div class="action-icon loan">📊</div>
+                    <h3>All Loans</h3>
+                    <p>View all loan applications</p>
+                </div>
+            </div>
+
+            <!-- Employee Data Section -->
+            <div class="transaction-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3>Customer Service</h3>
+                    <button onclick="refreshEmployeeData()" class="btn btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.9rem;">
+                        Refresh
+                    </button>
+                </div>
+                <div class="transaction-list" id="employee-data-list">
+                    <p style="text-align: center; color: rgba(0,0,0,0.6);">Select a customer to view their information</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>BAAHUBALI Bank - Built with Spring Boot & Modern Web Technologies</p>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('deposit')">&times;</button>
+            <h3>Deposit Funds</h3>
+            <div id="deposit-alert"></div>
+            <form id="deposit-form">
+                <div class="form-group">
+                    <label for="deposit-amount">Amount</label>
+                    <input type="number" id="deposit-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="deposit-description">Description</label>
+                    <input type="text" id="deposit-description" placeholder="e.g., Salary deposit">
+                </div>
+                <button type="submit" class="btn">Confirm Deposit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div id="withdraw-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('withdraw')">&times;</button>
+            <h3>Withdraw Funds</h3>
+            <div id="withdraw-alert"></div>
+            <form id="withdraw-form">
+                <div class="form-group">
+                    <label for="withdraw-amount">Amount</label>
+                    <input type="number" id="withdraw-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="withdraw-description">Description</label>
+                    <input type="text" id="withdraw-description" placeholder="e.g., ATM withdrawal">
+                </div>
+                <button type="submit" class="btn">Confirm Withdrawal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Transfer Modal -->
+    <div id="transfer-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('transfer')">&times;</button>
+            <h3>Make a Transfer</h3>
+            <div id="transfer-alert"></div>
+            <form id="transfer-form">
+                <div class="form-group">
+                    <label for="transfer-email">Recipient Email</label>
+                    <input type="email" id="transfer-email" placeholder="Enter recipient email" required>
+                </div>
+                <div class="form-group">
+                    <label for="transfer-amount">Amount</label>
+                    <input type="number" id="transfer-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                </div>
+                <button type="submit" class="btn">Confirm Transfer</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- All Transactions Modal -->
+    <div id="all-transactions-modal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeModal('all-transactions')">&times;</button>
+            <h3>All Transactions</h3>
+            <div style="margin-bottom: 20px;">
+                <button onclick="loadAllTransactions()" class="btn btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.9rem;">
+                    Refresh
+                </button>
+            </div>
+            <div class="transaction-list" id="all-transaction-list" style="max-height: 500px; overflow-y: auto;">
+                <p style="text-align: center; color: rgba(0,0,0,0.6);">Loading transactions...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create User Modal (Admin) -->
+    <div id="create-user-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('create-user')">&times;</button>
+            <h3>Create New User</h3>
+            <div id="create-user-alert"></div>
+            <form id="create-user-form">
+                <div class="form-group">
+                    <label for="create-name">Full Name</label>
+                    <input type="text" id="create-name" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="create-email">Email</label>
+                    <input type="email" id="create-email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="create-password">Password</label>
+                    <input type="password" id="create-password" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label for="create-role">Role</label>
+                    <select id="create-role" required>
+                        <option value="CUSTOMER">Customer</option>
+                        <option value="EMPLOYEE">Employee</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Create User</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Search Customer Modal (Employee) -->
+    <div id="search-customer-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('search-customer')">&times;</button>
+            <h3>Search Customer</h3>
+            <div id="search-customer-alert"></div>
+            <form id="search-customer-form">
+                <div class="form-group">
+                    <label for="customer-email">Customer Email</label>
+                    <input type="email" id="customer-email" placeholder="Enter customer email" required>
+                </div>
+                <button type="submit" class="btn">Search Customer</button>
+            </form>
+            <div id="customer-info" class="hidden" style="margin-top: 20px; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                <h4>Customer Information</h4>
+                <div id="customer-details"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Employee Deposit Modal -->
+    <div id="employee-deposit-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('employee-deposit')">&times;</button>
+            <h3>Process Deposit for Customer</h3>
+            <div id="employee-deposit-alert"></div>
+            <form id="employee-deposit-form">
+                <div class="form-group">
+                    <label for="emp-customer-email">Customer Email</label>
+                    <input type="email" id="emp-customer-email" placeholder="Enter customer email" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-deposit-amount">Amount</label>
+                    <input type="number" id="emp-deposit-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-deposit-description">Description</label>
+                    <input type="text" id="emp-deposit-description" placeholder="Enter description" required>
+                </div>
+                <button type="submit" class="btn">Process Deposit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Employee Withdraw Modal -->
+    <div id="employee-withdraw-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('employee-withdraw')">&times;</button>
+            <h3>Process Withdrawal for Customer</h3>
+            <div id="employee-withdraw-alert"></div>
+            <form id="employee-withdraw-form">
+                <div class="form-group">
+                    <label for="emp-withdraw-customer-email">Customer Email</label>
+                    <input type="email" id="emp-withdraw-customer-email" placeholder="Enter customer email" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-withdraw-amount">Amount</label>
+                    <input type="number" id="emp-withdraw-amount" step="0.01" min="0.01" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-withdraw-description">Description</label>
+                    <input type="text" id="emp-withdraw-description" placeholder="Enter description" required>
+                </div>
+                <button type="submit" class="btn">Process Withdrawal</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loan Application Modal -->
+    <div id="loan-application-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('loan-application')">&times;</button>
+            <h3>Apply for Loan</h3>
+            <div id="loan-application-alert"></div>
+            <form id="loan-application-form">
+                <div class="form-group">
+                    <label for="loan-type">Loan Type</label>
+                    <select id="loan-type" required>
+                        <option value="">Select loan type</option>
+                        <option value="EDUCATIONAL">Educational Loan (8.5% interest)</option>
+                        <option value="FARMING">Farming Loan (6.0% interest)</option>
+                        <option value="GOLD">Gold Loan (12.0% interest)</option>
+                        <option value="PERSONAL">Personal Loan (15.0% interest)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="loan-amount">Loan Amount</label>
+                    <input type="number" id="loan-amount" step="0.01" min="1000" placeholder="1000.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="loan-tenure">Tenure (Months)</label>
+                    <input type="number" id="loan-tenure" min="1" max="120" placeholder="12" required>
+                </div>
+                <div class="form-group">
+                    <label for="loan-purpose">Purpose</label>
+                    <textarea id="loan-purpose" rows="3" placeholder="Describe the purpose of the loan" required></textarea>
+                </div>
+                <button type="submit" class="btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- My Loans Modal -->
+    <div id="my-loans-modal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 80vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeModal('my-loans')">&times;</button>
+            <h3>My Loan Applications</h3>
+            <div class="transaction-list" id="my-loans-list">
+                <p style="text-align: center; color: rgba(0,0,0,0.6);">Loading loans...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Loans Modal (Admin) -->
+    <div id="pending-loans-modal" class="modal">
+        <div class="modal-content" style="max-width: 1000px; max-height: 80vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeModal('pending-loans')">&times;</button>
+            <h3>Pending Loan Applications</h3>
+            <div class="transaction-list" id="pending-loans-list">
+                <p style="text-align: center; color: rgba(0,0,0,0.6);">Loading pending loans...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Loans Modal (Admin) -->
+    <div id="all-loans-modal" class="modal">
+        <div class="modal-content" style="max-width: 1000px; max-height: 80vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeModal('all-loans')">&times;</button>
+            <h3>All Loan Applications</h3>
+            <div class="transaction-list" id="all-loans-list">
+                <p style="text-align: center; color: rgba(0,0,0,0.6);">Loading all loans...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Employee Management Modal (Admin) -->
+    <div id="employee-management-modal" class="modal">
+        <div class="modal-content" style="max-width: 1000px; max-height: 80vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeModal('employee-management')">&times;</button>
+            <h3>Employee Management</h3>
+            <div style="margin-bottom: 20px;">
+                <button onclick="openModal('create-employee')" class="btn btn-secondary" style="width: auto; padding: 8px 16px; font-size: 0.9rem;">
+                    Create New Employee
+                </button>
+            </div>
+            <div class="transaction-list" id="employee-management-list">
+                <p style="text-align: center; color: rgba(0,0,0,0.6);">Loading employees...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Employee Modal (Admin) -->
+    <div id="create-employee-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('create-employee')">&times;</button>
+            <h3>Create New Employee</h3>
+            <div id="create-employee-alert"></div>
+            <form id="create-employee-form">
+                <div class="form-group">
+                    <label for="emp-create-name">Full Name</label>
+                    <input type="text" id="emp-create-name" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-create-email">Email</label>
+                    <input type="email" id="emp-create-email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-create-password">Password</label>
+                    <input type="password" id="emp-create-password" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label for="emp-create-department">Department</label>
+                    <select id="emp-create-department" required>
+                        <option value="">Select department</option>
+                        <option value="CUSTOMER_SERVICE">Customer Service</option>
+                        <option value="LOAN_PROCESSING">Loan Processing</option>
+                        <option value="ACCOUNT_MANAGEMENT">Account Management</option>
+                        <option value="OPERATIONS">Operations</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Create Employee</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let authToken = null;
+
+        // API Base URL
+        const API_BASE = '/api';
+
+        // Utility functions
+        function showAlert(elementId, message, type = 'error') {
+            const alertDiv = document.getElementById(elementId);
+            alertDiv.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                alertDiv.innerHTML = '';
+            }, 5000);
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+            }).format(amount);
+        }
+
+        // Normalize a display name to Title Case (e.g., "sAI iNAPAKOLLA" -> "Sai Inapakolla")
+        function formatDisplayName(name) {
+            if (!name) return '';
+            return name
+                .toString()
+                .trim()
+                .split(/\s+/)
+                .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+                .join(' ');
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const loginContainer = document.getElementById('login-form-container');
+            const registerContainer = document.getElementById('register-form-container');
+            const welcomeText = document.getElementById('welcome-text');
+
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelector('.auth-tab:first-child').classList.add('active');
+                loginContainer.classList.remove('hidden');
+                registerContainer.classList.add('hidden');
+                welcomeText.textContent = 'Welcome Back!';
+            } else {
+                document.querySelector('.auth-tab:last-child').classList.add('active');
+                loginContainer.classList.add('hidden');
+                registerContainer.classList.remove('hidden');
+                welcomeText.textContent = 'Create Account';
+            }
+        }
+
+        // Modal functions
+        function openModal(type) {
+            document.getElementById(`${type}-modal`).classList.add('active');
+        }
+
+        function closeModal(type) {
+            document.getElementById(`${type}-modal`).classList.remove('active');
+            // Clear form and alerts
+            document.getElementById(`${type}-form`).reset();
+            document.getElementById(`${type}-alert`).innerHTML = '';
+        }
+
+        // Authentication functions
+        async function fetchRoleForEmail(email) {
+            const response = await fetch(`${API_BASE}/auth/role?email=${encodeURIComponent(email)}`);
+            if (!response.ok) {
+                const data = await response.json().catch(() => ({}));
+                throw new Error(data.error || 'Unable to verify role');
+            }
+            const data = await response.json();
+            return data.role;
+        }
+
+        async function login(email, password) {
+            try {
+                const response = await fetch(`${API_BASE}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    authToken = data.token;
+                    currentUser = { id: data.userId, role: data.role, name: data.name };
+                    showAlert('login-alert', 'Login successful!', 'success');
+                    showDashboard();
+                } else {
+                    showAlert('login-alert', data.error || 'Login failed');
+                }
+            } catch (error) {
+                showAlert('login-alert', 'Network error. Please try again.');
+            }
+        }
+
+        async function register(name, email, password) {
+            try {
+                const response = await fetch(`${API_BASE}/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    authToken = data.token;
+                    currentUser = { id: data.userId, role: data.role };
+                    showAlert('register-alert', 'Registration successful!', 'success');
+                    showDashboard();
+                } else {
+                    showAlert('register-alert', data.error || 'Registration failed');
+                }
+            } catch (error) {
+                showAlert('register-alert', 'Network error. Please try again.');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            authToken = null;
+            document.getElementById('auth-section').classList.remove('hidden');
+            document.getElementById('user-dashboard').classList.add('hidden');
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('employee-dashboard').classList.add('hidden');
+            document.getElementById('user-section').classList.add('hidden');
+        }
+
+        function showDashboard() {
+            document.getElementById('auth-section').classList.add('hidden');
+            document.getElementById('user-section').classList.remove('hidden');
+            
+            // Show appropriate dashboard based on user role
+            if (currentUser && currentUser.role) {
+                const role = currentUser.role.toUpperCase();
+                if (role === 'ADMIN') {
+                    document.getElementById('admin-dashboard').classList.remove('hidden');
+                    loadAdminData();
+                } else if (role === 'EMPLOYEE') {
+                    document.getElementById('employee-dashboard').classList.remove('hidden');
+                    loadEmployeeData();
+                } else {
+                    document.getElementById('user-dashboard').classList.remove('hidden');
+                    loadUserData();
+                    loadTransactions();
+                }
+            } else {
+                // Default to user dashboard
+                document.getElementById('user-dashboard').classList.remove('hidden');
+                loadUserData();
+                loadTransactions();
+            }
+        }
+
+        // Dashboard functions
+        async function loadUserData() {
+            try {
+                const response = await fetch(`${API_BASE}/accounts/me`, {
+                    headers: {
+                        'X-Auth-Token': authToken
+                    }
+                });
+
+                if (response.ok) {
+                    const account = await response.json();
+                    document.getElementById('balance-amount').textContent = formatCurrency(account.balance);
+                    document.getElementById('user-name').textContent = formatDisplayName(account.user?.name) || 'User';
+                    document.getElementById('user-greeting').textContent = `Hi, ${formatDisplayName(currentUser.name) || 'User'}`;
+                    const avatarName = formatDisplayName(account.user?.name) || 'User';
+                    document.getElementById('user-avatar').textContent = avatarName.charAt(0).toUpperCase();
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        async function loadTransactions() {
+            try {
+                const response = await fetch(`${API_BASE}/transactions/my-transactions`, {
+                    headers: {
+                        'X-Auth-Token': authToken
+                    }
+                });
+
+                if (response.ok) {
+                    const transactions = await response.json();
+                    // Show only last 5 transactions for recent transactions
+                    const recentTransactions = transactions.slice(0, 5);
+                    displayTransactions(recentTransactions);
+                }
+            } catch (error) {
+                console.error('Error loading transactions:', error);
+            }
+        }
+
+        async function loadAllTransactions() {
+            try {
+                const response = await fetch(`${API_BASE}/transactions/my-transactions`, {
+                    headers: {
+                        'X-Auth-Token': authToken
+                    }
+                });
+
+                if (response.ok) {
+                    const transactions = await response.json();
+                    displayAllTransactions(transactions);
+                }
+            } catch (error) {
+                console.error('Error loading all transactions:', error);
+            }
+        }
+
+        function displayTransactions(transactions) {
+            const container = document.getElementById('transaction-list');
+            
+            if (transactions.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No transactions yet</p>';
+                return;
+            }
+
+            container.innerHTML = transactions.map(tx => {
+                const isPositive = tx.type === 'DEPOSIT' || (tx.type === 'TRANSFER' && tx.description.includes('from'));
+                const isNegative = tx.type === 'WITHDRAW' || (tx.type === 'TRANSFER' && tx.description.includes('to'));
+                
+                return `
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>${tx.type.charAt(0) + tx.type.slice(1).toLowerCase()}</h4>
+                            <p>${tx.description || 'No description'}</p>
+                            <p style="font-size: 0.8em; opacity: 0.6;">${new Date(tx.timestamp).toLocaleString()}</p>
+                        </div>
+                        <div class="transaction-amount ${isPositive ? 'positive' : 'negative'}">
+                            ${isPositive ? '+' : '-'}${formatCurrency(tx.amount)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function displayAllTransactions(transactions) {
+            const container = document.getElementById('all-transaction-list');
+            
+            if (transactions.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.6);">No transactions yet</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="transaction-count">
+                    <strong>Total Transactions: ${transactions.length}</strong>
+                </div>
+                ${transactions.map(tx => {
+                    const isPositive = tx.type === 'DEPOSIT' || (tx.type === 'TRANSFER' && tx.description.includes('from'));
+                    const isNegative = tx.type === 'WITHDRAW' || (tx.type === 'TRANSFER' && tx.description.includes('to'));
+                    
+                    return `
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>${tx.type.charAt(0) + tx.type.slice(1).toLowerCase()}</h4>
+                                <p>${tx.description || 'No description'}</p>
+                                <p style="font-size: 0.8em; opacity: 0.6;">${new Date(tx.timestamp).toLocaleString()}</p>
+                            </div>
+                            <div class="transaction-amount ${isPositive ? 'positive' : 'negative'}">
+                                ${isPositive ? '+' : '-'}${formatCurrency(tx.amount)}
+                            </div>
+                        </div>
+                    `;
+                }).join('')}
+            `;
+        }
+
+        function showAllTransactions() {
+            document.getElementById('all-transactions-modal').classList.add('active');
+            loadAllTransactions();
+        }
+
+        // Admin Dashboard Functions
+        async function loadAdminData() {
+            try {
+                const [usersResponse, statsResponse] = await Promise.all([
+                    fetch(`${API_BASE}/users`, {
+                        headers: { 'X-Auth-Token': authToken }
+                    }),
+                    fetch(`${API_BASE}/accounts/me`, {
+                        headers: { 'X-Auth-Token': authToken }
+                    })
+                ]);
+
+                if (usersResponse.ok && statsResponse.ok) {
+                    const users = await usersResponse.json();
+                    const userData = await statsResponse.json();
+                    
+                    document.getElementById('admin-name').textContent = formatDisplayName(userData.user.name) || 'Admin';
+                    document.getElementById('admin-stats').textContent = `${users.length} Users`;
+                    
+                    displayAdminData(users);
+                }
+            } catch (error) {
+                console.error('Error loading admin data:', error);
+            }
+        }
+
+        function displayAdminData(users) {
+            const container = document.getElementById('admin-data-list');
+            
+            // Group users by role
+            const admins = users.filter(u => u.role === 'ADMIN');
+            const employees = users.filter(u => u.role === 'EMPLOYEE');
+            const customers = users.filter(u => u.role === 'CUSTOMER');
+            
+            container.innerHTML = `
+                <div class="transaction-count">
+                    <strong>User Management - Total: ${users.length}</strong>
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: rgba(102, 126, 234, 0.1); border-radius: 10px;">
+                    <h4 style="margin-bottom: 10px;">👑 Administrators (${admins.length})</h4>
+                    ${admins.map(user => `
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>${user.name}</h4>
+                                <p>${user.email}</p>
+                                <p style="font-size: 0.8em; opacity: 0.6;">Role: ${user.role} | Balance: $${user.balance || '0.00'}</p>
+                            </div>
+                            <div class="transaction-amount">
+                                <span style="color: #667eea; font-weight: bold;">ADMIN</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: rgba(6, 182, 212, 0.1); border-radius: 10px;">
+                    <h4 style="margin-bottom: 10px;">👨‍💼 Employees (${employees.length})</h4>
+                    ${employees.map(user => `
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>${user.name}</h4>
+                                <p>${user.email}</p>
+                                <p style="font-size: 0.8em; opacity: 0.6;">Role: ${user.role} | Balance: $${user.balance || '0.00'}</p>
+                            </div>
+                            <div class="transaction-amount">
+                                <span style="color: #06b6d4; font-weight: bold;">EMPLOYEE</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="margin: 20px 0; padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 10px;">
+                    <h4 style="margin-bottom: 10px;">👤 Customers (${customers.length})</h4>
+                    ${customers.map(user => `
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>${user.name}</h4>
+                                <p>${user.email}</p>
+                                <p style="font-size: 0.8em; opacity: 0.6;">Role: ${user.role} | Balance: $${user.balance || '0.00'}</p>
+                            </div>
+                            <div class="transaction-amount">
+                                <span style="color: #10b981; font-weight: bold;">CUSTOMER</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        async function loadAllUsers() {
+            try {
+                const response = await fetch(`${API_BASE}/users`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const users = await response.json();
+                    displayAdminData(users);
+                }
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        async function loadSystemStats() {
+            try {
+                const [usersResponse, loansResponse] = await Promise.all([
+                    fetch(`${API_BASE}/users`, { headers: { 'X-Auth-Token': authToken } }),
+                    fetch(`${API_BASE}/loans/all`, { headers: { 'X-Auth-Token': authToken } })
+                ]);
+                
+                if (usersResponse.ok && loansResponse.ok) {
+                    const users = await usersResponse.json();
+                    const loans = await loansResponse.json();
+                    
+                    const totalBalance = users.reduce((sum, user) => sum + parseFloat(user.balance || 0), 0);
+                    const totalTransactions = users.reduce((sum, user) => sum + (user.totalTransactions || 0), 0);
+                    
+                    // Count users by role
+                    const adminCount = users.filter(u => u.role === 'ADMIN').length;
+                    const employeeCount = users.filter(u => u.role === 'EMPLOYEE').length;
+                    const customerCount = users.filter(u => u.role === 'CUSTOMER').length;
+                    
+                    // Count loans by status
+                    const pendingLoans = loans.filter(l => l.status === 'PENDING').length;
+                    const approvedLoans = loans.filter(l => l.status === 'APPROVED').length;
+                    const rejectedLoans = loans.filter(l => l.status === 'REJECTED').length;
+                    const totalLoanAmount = loans.reduce((sum, loan) => sum + parseFloat(loan.amount || 0), 0);
+                    
+                    document.getElementById('admin-stats').textContent = `$${totalBalance.toFixed(2)} Total Assets`;
+                    document.getElementById('admin-data-list').innerHTML = `
+                        <div class="transaction-count">
+                            <strong>System Statistics</strong>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>Total Users</h4>
+                                <p>${users.length} registered users</p>
+                            </div>
+                            <div class="transaction-amount positive">${users.length}</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>User Breakdown</h4>
+                                <p>Admins: ${adminCount} | Employees: ${employeeCount} | Customers: ${customerCount}</p>
+                            </div>
+                            <div class="transaction-amount"></div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>Total Balance</h4>
+                                <p>All user balances combined</p>
+                            </div>
+                            <div class="transaction-amount positive">$${totalBalance.toFixed(2)}</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>Total Transactions</h4>
+                                <p>All transactions processed</p>
+                            </div>
+                            <div class="transaction-amount positive">${totalTransactions}</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>Loan Statistics</h4>
+                                <p>Total Loans: ${loans.length} | Amount: $${totalLoanAmount.toFixed(2)}</p>
+                            </div>
+                            <div class="transaction-amount positive">${loans.length}</div>
+                        </div>
+                        <div class="transaction-item">
+                            <div class="transaction-info">
+                                <h4>Loan Status</h4>
+                                <p>Pending: ${pendingLoans} | Approved: ${approvedLoans} | Rejected: ${rejectedLoans}</p>
+                            </div>
+                            <div class="transaction-amount"></div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error loading system stats:', error);
+            }
+        }
+
+        async function loadAllTransactionsAdmin() {
+            try {
+                const response = await fetch(`${API_BASE}/transactions/my-transactions`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const transactions = await response.json();
+                    displayAllTransactions(transactions);
+                    document.getElementById('all-transactions-modal').classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error loading admin transactions:', error);
+            }
+        }
+
+        function refreshAdminData() {
+            loadAdminData();
+        }
+
+        function refreshEmployeeData() {
+            loadEmployeeData();
+        }
+
+        // Employee Dashboard Functions
+        async function loadEmployeeData() {
+            try {
+                const response = await fetch(`${API_BASE}/accounts/me`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const userData = await response.json();
+                    document.getElementById('employee-name').textContent = formatDisplayName(userData.user.name) || 'Employee';
+                    document.getElementById('employee-stats').textContent = 'Customer Service';
+                    document.getElementById('employee-data-list').innerHTML = '<p style="text-align: center; color: rgba(0,0,0,0.6);">Search for a customer to view their information</p>';
+                }
+            } catch (error) {
+                console.error('Error loading employee data:', error);
+            }
+        }
+
+        function searchCustomer() {
+            document.getElementById('search-customer-modal').classList.add('active');
+        }
+
+        async function loadCustomerTransactions() {
+            const email = prompt('Enter customer email:');
+            if (email) {
+                try {
+                    const response = await fetch(`${API_BASE}/users/by-email/${email}`, {
+                        headers: { 'X-Auth-Token': authToken }
+                    });
+                    if (response.ok) {
+                        const customer = await response.json();
+                        document.getElementById('employee-data-list').innerHTML = `
+                            <div class="transaction-count">
+                                <strong>Customer: ${customer.name}</strong>
+                            </div>
+                            <div class="transaction-item">
+                                <div class="transaction-info">
+                                    <h4>Customer Information</h4>
+                                    <p>Email: ${customer.email}</p>
+                                    <p>ID: ${customer.id}</p>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        alert('Customer not found');
+                    }
+                } catch (error) {
+                    console.error('Error loading customer:', error);
+                }
+            }
+        }
+
+        function refreshEmployeeData() {
+            loadEmployeeData();
+        }
+
+        // Admin Handler Functions
+        async function createUser(name, email, password, role) {
+            try {
+                const response = await fetch(`${API_BASE}/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        passwordHash: password, // Note: In production, hash this on backend
+                        role: role
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('create-user-alert', 'User created successfully!', 'success');
+                    document.getElementById('create-user-form').reset();
+                    closeModal('create-user');
+                    loadAdminData();
+                } else {
+                    showAlert('create-user-alert', data.error || 'Failed to create user');
+                }
+            } catch (error) {
+                showAlert('create-user-alert', 'Network error. Please try again.');
+            }
+        }
+
+        // Loan Functions
+        async function applyForLoan(loanType, amount, tenureMonths, purpose) {
+            try {
+                const response = await fetch(`${API_BASE}/loans/apply`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        loanType: loanType,
+                        amount: parseFloat(amount),
+                        tenureMonths: parseInt(tenureMonths),
+                        purpose: purpose
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('loan-application-alert', 'Loan application submitted successfully!', 'success');
+                    document.getElementById('loan-application-form').reset();
+                    closeModal('loan-application');
+                } else {
+                    showAlert('loan-application-alert', data.error || 'Loan application failed');
+                }
+            } catch (error) {
+                showAlert('loan-application-alert', 'Network error. Please try again.');
+            }
+        }
+
+        async function loadMyLoans() {
+            document.getElementById('my-loans-modal').classList.add('active');
+            try {
+                const response = await fetch(`${API_BASE}/loans/my-loans`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const loans = await response.json();
+                    displayMyLoans(loans);
+                }
+            } catch (error) {
+                console.error('Error loading my loans:', error);
+            }
+        }
+
+        function displayMyLoans(loans) {
+            const container = document.getElementById('my-loans-list');
+            
+            if (loans.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: rgba(0,0,0,0.6);">No loan applications yet</p>';
+                return;
+            }
+
+            container.innerHTML = loans.map(loan => `
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <h4>${loan.loanType} Loan</h4>
+                        <p>Amount: ${formatCurrency(loan.amount)}</p>
+                        <p>Tenure: ${loan.tenureMonths} months</p>
+                        <p>Interest Rate: ${loan.interestRate}%</p>
+                        <p>Purpose: ${loan.purpose}</p>
+                        <p style="font-size: 0.8em; opacity: 0.6;">Applied: ${new Date(loan.applicationDate).toLocaleString()}</p>
+                        ${loan.adminComments ? `<p style="font-size: 0.8em; color: #666;">Admin Comments: ${loan.adminComments}</p>` : ''}
+                    </div>
+                    <div class="transaction-amount ${getLoanStatusColor(loan.status)}">
+                        ${loan.status}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadPendingLoans() {
+            document.getElementById('pending-loans-modal').classList.add('active');
+            try {
+                const response = await fetch(`${API_BASE}/loans/pending`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const loans = await response.json();
+                    displayPendingLoans(loans);
+                }
+            } catch (error) {
+                console.error('Error loading pending loans:', error);
+            }
+        }
+
+        function displayPendingLoans(loans) {
+            const container = document.getElementById('pending-loans-list');
+            
+            if (loans.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: rgba(0,0,0,0.6);">No pending loans</p>';
+                return;
+            }
+
+            container.innerHTML = loans.map(loan => `
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <h4>${loan.loanType} Loan - ${loan.user.name}</h4>
+                        <p>Amount: ${formatCurrency(loan.amount)}</p>
+                        <p>Tenure: ${loan.tenureMonths} months</p>
+                        <p>Interest Rate: ${loan.interestRate}%</p>
+                        <p>Purpose: ${loan.purpose}</p>
+                        <p>Email: ${loan.user.email}</p>
+                        <p style="font-size: 0.8em; opacity: 0.6;">Applied: ${new Date(loan.applicationDate).toLocaleString()}</p>
+                    </div>
+                    <div class="transaction-amount">
+                        <button onclick="approveLoan(${loan.id})" class="btn btn-approve" style="padding: 5px 10px; font-size: 0.8rem; margin-right: 5px;">Approve</button>
+                        <button onclick="rejectLoan(${loan.id})" class="btn" style="padding: 5px 10px; font-size: 0.8rem; background: #ef4444;">Reject</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadAllLoans() {
+            document.getElementById('all-loans-modal').classList.add('active');
+            try {
+                const response = await fetch(`${API_BASE}/loans/all`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const loans = await response.json();
+                    displayAllLoans(loans);
+                }
+            } catch (error) {
+                console.error('Error loading all loans:', error);
+            }
+        }
+
+        function displayAllLoans(loans) {
+            const container = document.getElementById('all-loans-list');
+            
+            if (loans.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: rgba(0,0,0,0.6);">No loans found</p>';
+                return;
+            }
+
+            container.innerHTML = loans.map(loan => `
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <h4>${loan.loanType} Loan - ${loan.user.name}</h4>
+                        <p>Amount: ${formatCurrency(loan.amount)}</p>
+                        <p>Tenure: ${loan.tenureMonths} months</p>
+                        <p>Interest Rate: ${loan.interestRate}%</p>
+                        <p>Purpose: ${loan.purpose}</p>
+                        <p>Email: ${loan.user.email}</p>
+                        <p style="font-size: 0.8em; opacity: 0.6;">Applied: ${new Date(loan.applicationDate).toLocaleString()}</p>
+                        ${loan.adminComments ? `<p style="font-size: 0.8em; color: #666;">Admin Comments: ${loan.adminComments}</p>` : ''}
+                    </div>
+                    <div class="transaction-amount ${getLoanStatusColor(loan.status)}">
+                        ${loan.status}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function approveLoan(loanId) {
+            const comments = prompt('Enter approval comments (optional):');
+            try {
+                const response = await fetch(`${API_BASE}/loans/${loanId}/approve`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({ comments: comments || '' })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Loan approved successfully!');
+                    loadPendingLoans();
+                } else {
+                    alert(data.error || 'Failed to approve loan');
+                }
+            } catch (error) {
+                alert('Network error. Please try again.');
+            }
+        }
+
+        async function rejectLoan(loanId) {
+            const comments = prompt('Enter rejection reason (required):');
+            if (!comments) return;
+            
+            try {
+                const response = await fetch(`${API_BASE}/loans/${loanId}/reject`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({ comments: comments })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Loan rejected');
+                    loadPendingLoans();
+                } else {
+                    alert(data.error || 'Failed to reject loan');
+                }
+            } catch (error) {
+                alert('Network error. Please try again.');
+            }
+        }
+
+        function getLoanStatusColor(status) {
+            switch (status) {
+                case 'APPROVED': return 'positive';
+                case 'REJECTED': return 'negative';
+                case 'PENDING': return '';
+                default: return '';
+            }
+        }
+
+        // Employee Management Functions
+        async function loadEmployeeManagement() {
+            document.getElementById('employee-management-modal').classList.add('active');
+            try {
+                const response = await fetch(`${API_BASE}/users`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                if (response.ok) {
+                    const users = await response.json();
+                    const employees = users.filter(u => u.role === 'EMPLOYEE');
+                    displayEmployeeManagement(employees);
+                }
+            } catch (error) {
+                console.error('Error loading employees:', error);
+            }
+        }
+
+        function displayEmployeeManagement(employees) {
+            const container = document.getElementById('employee-management-list');
+            
+            if (employees.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: rgba(0,0,0,0.6);">No employees found</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="transaction-count">
+                    <strong>Employee Directory - ${employees.length} Employees</strong>
+                </div>
+                ${employees.map(emp => `
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>${emp.name}</h4>
+                            <p>${emp.email}</p>
+                            <p style="font-size: 0.8em; opacity: 0.6;">Role: ${emp.role} | Balance: $${emp.balance || '0.00'}</p>
+                            <p style="font-size: 0.8em; color: #06b6d4;">Status: Active Employee</p>
+                        </div>
+                        <div class="transaction-amount">
+                            <span style="color: #06b6d4; font-weight: bold;">EMPLOYEE</span>
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        async function createEmployee(name, email, password, department) {
+            try {
+                const response = await fetch(`${API_BASE}/users`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        passwordHash: password, // Backend will hash this
+                        role: 'EMPLOYEE'
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('create-employee-alert', 'Employee created successfully!', 'success');
+                    document.getElementById('create-employee-form').reset();
+                    closeModal('create-employee');
+                    loadEmployeeManagement();
+                } else {
+                    showAlert('create-employee-alert', data.error || 'Failed to create employee');
+                }
+            } catch (error) {
+                showAlert('create-employee-alert', 'Network error. Please try again.');
+            }
+        }
+
+        // Employee Handler Functions
+        async function searchCustomerByEmail(email) {
+            try {
+                const response = await fetch(`${API_BASE}/users/by-email/${email}`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                
+                if (response.ok) {
+                    const customer = await response.json();
+                    document.getElementById('customer-info').classList.remove('hidden');
+                    document.getElementById('customer-details').innerHTML = `
+                        <p><strong>Name:</strong> ${customer.name}</p>
+                        <p><strong>Email:</strong> ${customer.email}</p>
+                        <p><strong>ID:</strong> ${customer.id}</p>
+                    `;
+                    showAlert('search-customer-alert', 'Customer found!', 'success');
+                } else {
+                    showAlert('search-customer-alert', 'Customer not found');
+                }
+            } catch (error) {
+                showAlert('search-customer-alert', 'Network error. Please try again.');
+            }
+        }
+
+        async function processEmployeeDeposit(email, amount, description) {
+            try {
+                // First find the customer
+                const customerResponse = await fetch(`${API_BASE}/users/by-email/${email}`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                
+                if (!customerResponse.ok) {
+                    showAlert('employee-deposit-alert', 'Customer not found');
+                    return;
+                }
+                
+                const customer = await customerResponse.json();
+                
+                // Process deposit for the customer
+                const response = await fetch(`${API_BASE}/transactions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        amount: parseFloat(amount),
+                        type: 'DEPOSIT',
+                        description: `Employee processed: ${description}`
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('employee-deposit-alert', `Deposit of $${amount} processed for ${customer.name}`, 'success');
+                    document.getElementById('employee-deposit-form').reset();
+                    closeModal('employee-deposit');
+                } else {
+                    showAlert('employee-deposit-alert', data.error || 'Deposit failed');
+                }
+            } catch (error) {
+                showAlert('employee-deposit-alert', 'Network error. Please try again.');
+            }
+        }
+
+        async function processEmployeeWithdraw(email, amount, description) {
+            try {
+                // First find the customer
+                const customerResponse = await fetch(`${API_BASE}/users/by-email/${email}`, {
+                    headers: { 'X-Auth-Token': authToken }
+                });
+                
+                if (!customerResponse.ok) {
+                    showAlert('employee-withdraw-alert', 'Customer not found');
+                    return;
+                }
+                
+                const customer = await customerResponse.json();
+                
+                // Process withdrawal for the customer
+                const response = await fetch(`${API_BASE}/transactions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        amount: parseFloat(amount),
+                        type: 'WITHDRAW',
+                        description: `Employee processed: ${description}`
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('employee-withdraw-alert', `Withdrawal of $${amount} processed for ${customer.name}`, 'success');
+                    document.getElementById('employee-withdraw-form').reset();
+                    closeModal('employee-withdraw');
+                } else {
+                    showAlert('employee-withdraw-alert', data.error || 'Withdrawal failed');
+                }
+            } catch (error) {
+                showAlert('employee-withdraw-alert', 'Network error. Please try again.');
+            }
+        }
+
+        // Transaction functions
+        async function deposit(amount, description) {
+            try {
+                const response = await fetch(`${API_BASE}/transactions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        amount: parseFloat(amount),
+                        type: 'DEPOSIT',
+                        description: description
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('deposit-alert', 'Deposit successful!', 'success');
+                    document.getElementById('deposit-form').reset();
+                    closeModal('deposit');
+                    loadUserData();
+                    loadTransactions();
+                } else {
+                    showAlert('deposit-alert', data.error || 'Deposit failed');
+                }
+            } catch (error) {
+                showAlert('deposit-alert', 'Network error. Please try again.');
+            }
+        }
+
+        async function withdraw(amount, description) {
+            try {
+                const response = await fetch(`${API_BASE}/transactions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        amount: parseFloat(amount),
+                        type: 'WITHDRAW',
+                        description: description
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('withdraw-alert', 'Withdrawal successful!', 'success');
+                    document.getElementById('withdraw-form').reset();
+                    closeModal('withdraw');
+                    loadUserData();
+                    loadTransactions();
+                } else {
+                    showAlert('withdraw-alert', data.error || 'Withdrawal failed');
+                }
+            } catch (error) {
+                showAlert('withdraw-alert', 'Network error. Please try again.');
+            }
+        }
+
+        async function transfer(email, amount) {
+            try {
+                const response = await fetch(`${API_BASE}/transactions/transfer-by-email`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Auth-Token': authToken
+                    },
+                    body: JSON.stringify({
+                        toEmail: email,
+                        amount: parseFloat(amount)
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('transfer-alert', data.message || 'Transfer successful!', 'success');
+                    document.getElementById('transfer-form').reset();
+                    closeModal('transfer');
+                    loadUserData();
+                    loadTransactions();
+                } else {
+                    showAlert('transfer-alert', data.error || 'Transfer failed');
+                }
+            } catch (error) {
+                showAlert('transfer-alert', 'Network error. Please try again.');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const selectedRole = document.getElementById('login-role').value;
+            // Verify role before attempting login
+            fetchRoleForEmail(email)
+                .then(actualRole => {
+                    if (actualRole !== selectedRole) {
+                        showAlert('login-alert', `Selected role (${selectedRole}) does not match your account (${actualRole}).`);
+                        return;
+                    }
+                    login(email, password);
+                })
+                .catch(err => {
+                    showAlert('login-alert', err.message || 'Unable to verify role');
+                });
+        });
+
+        document.getElementById('register-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            register(name, email, password);
+        });
+
+        document.getElementById('deposit-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const amount = document.getElementById('deposit-amount').value;
+            const description = document.getElementById('deposit-description').value;
+            deposit(amount, description);
+        });
+
+        document.getElementById('withdraw-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const amount = document.getElementById('withdraw-amount').value;
+            const description = document.getElementById('withdraw-description').value;
+            withdraw(amount, description);
+        });
+
+        document.getElementById('transfer-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('transfer-email').value;
+            const amount = document.getElementById('transfer-amount').value;
+            transfer(email, amount);
+        });
+
+        // Admin form handlers
+        document.getElementById('create-user-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('create-name').value;
+            const email = document.getElementById('create-email').value;
+            const password = document.getElementById('create-password').value;
+            const role = document.getElementById('create-role').value;
+            createUser(name, email, password, role);
+        });
+
+        // Employee form handlers
+        document.getElementById('search-customer-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('customer-email').value;
+            searchCustomerByEmail(email);
+        });
+
+        document.getElementById('employee-deposit-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emp-customer-email').value;
+            const amount = document.getElementById('emp-deposit-amount').value;
+            const description = document.getElementById('emp-deposit-description').value;
+            processEmployeeDeposit(email, amount, description);
+        });
+
+        document.getElementById('employee-withdraw-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('emp-withdraw-customer-email').value;
+            const amount = document.getElementById('emp-withdraw-amount').value;
+            const description = document.getElementById('emp-withdraw-description').value;
+            processEmployeeWithdraw(email, amount, description);
+        });
+
+        // Loan form handlers
+        document.getElementById('loan-application-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const loanType = document.getElementById('loan-type').value;
+            const amount = document.getElementById('loan-amount').value;
+            const tenure = document.getElementById('loan-tenure').value;
+            const purpose = document.getElementById('loan-purpose').value;
+            applyForLoan(loanType, amount, tenure, purpose);
+        });
+
+        // Employee form handlers
+        document.getElementById('create-employee-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('emp-create-name').value;
+            const email = document.getElementById('emp-create-email').value;
+            const password = document.getElementById('emp-create-password').value;
+            const department = document.getElementById('emp-create-department').value;
+            createEmployee(name, email, password, department);
+        });
+
+        // Close modals when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
+
+
